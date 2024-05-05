@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+    /* Styles for portrait devices */
+    .nav > h1 {
+      font-size: 20px;
+    }
+    .nav > a{
+        padding:1px 2px;
+        font-size:12px;
+
+    }
+    .text-area{
+       width: 100%;
+    }
+    
+    .posts {
+      padding-top: 2rem; /* Add some padding at the top */
+    }
+  
+    .postcontainer {
+      justify-content: center; /* Center posts horizontally */
+    }
+  
+    .post {
+      width: 90%; /* Make posts take up 90% of the width */
+      margin-right: 0; /* Remove right margin */
+    }
+  }
+  

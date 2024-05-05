@@ -1,0 +1,9 @@
+   .red-placeholder::placeholder {
+        color: red;
+    }
+#upload::-webkit-file-upload-button{
+    border: none;
+    border-radius:4px;
+    color: white;
+    background:#ffc20c     ;
+}

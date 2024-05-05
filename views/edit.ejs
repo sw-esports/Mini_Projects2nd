@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+
+</head>
+<body>
+  <main class="w-screen h-screen bg-zinc-900 text-white p-5 font-mono">
+    <div class="nav  px-4 flex justify-between mb-10  border-b-2 border-spacing-2 h-14" > <h1 class="text-3xl">Edit Your Post </h1><a href="/delete/<%= post._id %>"><button class="bg-red-500 px-6 py-2 rounded-md  hover:bg-red-600">Delete</button></a></div>
+    <form action="/update/<%= post._id %>" method="post">
+        <textarea class=" text-area bg-transparent border-zinc-500 border-2 resize-none rounded-md block mb-2 p-3" name="content" id="content" cols="40" rows="3"><%= post.content %></textarea>
+        <input class="bg-yellow-500 text-black px-6 py-3 rounded-md  block mt-2 hover:bg-blue-500 hover:text-white"  type="submit" value="Update Your Post">
+    </form>
+  </main>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

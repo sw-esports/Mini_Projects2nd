@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+</head>
+<body>
+  <main class="w-screen h-screen bg-zinc-900 text-white p-5 font-mono">
+    <div class="nav  px-4 flex justify-between mb-10  border-b-2 border-spacing-2 h-14" > <h1 class="text-3xl">Create User</h1><a href="/login"><button class="bg-blue-600 px-6 py-2 rounded-md  hover:bg-yellow-500">Login</button></a></div>
+    <form action="/register" method="post">
+        <input class="px-3 mb-1  py-2 rounded-md bg-transparent border-zinc-100 border-2 " type="text" name="username" id="Username" placeholder="Username">
+        <input class="px-3 mb-1 py-2 rounded-md bg-transparent border-zinc-100 border-2 " type="email" name="email" id="email" placeholder="Email">
+        <input class="px-3 mb-1 py-2 rounded-md bg-transparent border-zinc-100 border-2 " type="password" name="password" id="password" placeholder="Password">
+        <input class="px-3 mb-1 py-2 rounded-md bg-transparent border-zinc-100 border-2 " type="number" name="age" id="age" placeholder="Age">
+        <input class="bg-blue-600 px-6 py-3 rounded-md  block mt-2 hover:bg-green-500"  type="submit" value="Create User">
+        <script>
+          
+    // Check if the URL contains a message parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+  
+    // If message exists, show alert
+    if (message) {
+        var passwordInput = document.getElementById("email");
+        passwordInput.placeholder = 'Email Already In use';
+        passwordInput.classList.add("red-placeholder");
+        
+    }
+        </script>
+    </form>
+  </main>
+</body>
+</html>

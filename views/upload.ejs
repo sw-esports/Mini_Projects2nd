@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <main class="w-screen h-screen bg-zinc-900 text-white p-5 font-mono">
+    <div class="nav  px-4 flex justify-between mb-10  border-b-2 border-spacing-2 h-14" > <h1 class="text-3xl">Change Profile Picture </h1><a href="/profile"><button class="bg-blue-600 px-6 py-2 rounded-md  hover:bg-yellow-500">Profile</button></a></div>
+   <div class="page flex gap-12 w-full h-[80%]">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+       
+           
+   
+  <input class="px-3 py-2 mb-1 rounded-md bg-transparent border-zinc-100 border-2  " type="file" name="image" id="upload" placeholder="Upload Image" accept="images/*">
+  <input class="bg-blue-600 px-6 py-3 rounded-md  block mt-2 hover:bg-green-500"  type="submit" value="Upload">
+</form>
+
+    <div class="image_name">
+        <div class="image-container w-32 h-32 rounded-md bg-zinc-800 overflow-hidden text-white text-3xl p-2">
+
+            <img class=" cursor-pointer object-cover w-full h-full scale-x-[-1] mb-3 " src="/uploads/images/<%=user.profilepic%>" id="pic" alt="PP">
+             </div>
+             <div class="name">Current Image:</div>
+    </div>
+</div>
+  </main>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

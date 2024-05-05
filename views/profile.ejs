@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/stylesheets/profile.css">
+</head>
+
+<body>
+  <main class="w-screen min-h-screen : bg-zinc-900 text-white p-5 font-mono ">
+    <div class="nav  w-full px-4 flex justify-between mb-5  border-b-2 border-spacing-2 h-14">
+      <div class="left w-1/2">
+        <h1 class="text-3xl">Welcome <%= user.username %>❤️👌 </h1>
+      </div>
+      <div class="right flex gap-3"><a href="/logout"><button
+            class="bg-blue-600 px-6 py-2 rounded-md  hover:bg-yellow-500">Logout</button>
+          </a>
+          <div class="image-container w-12 h-12 rounded-md  overflow-hidden">
+            <img class=" cursor-pointer object-cover w-12 h-12 scale-x-[-1] " src="/uploads/images/<%=user.profilepic%>" id="pic" alt="PP">
+          </div>
+          </div>
+    </div>
+    <h1 class="text-3xl mb-5">Create Post: </h1>
+    <form action="/post" method="post">
+
+      <textarea class=" text-area bg-transparent border-zinc-500 border-2 resize-none rounded-md block mb-2"
+        name="content" id="content" cols="40" rows="2"></textarea>
+      <input class="bg-blue-600 px-6 py-2 rounded-md  hover:bg-green-500" type="submit" value="Create Post">
+
+    </form>
+    <div class="posts overflow-x-hidden">
+      <h1 class="text-2xl text-center mt-10 mb-3 ">Your Posts </h1>
+      <div class="postcontainer flex flex-wrap w-full">
+        <% user.posts.reverse().forEach(function(post) { %>
+          <div class="post relative mb-2 mr-4 w-72 rounded-md bg-zinc-800 p-4 border-2 border-zinc-700">
+            <div class="username text-blue-600">@<%= user.username %>
+            </div>
+            <div class="content text-sm tracking-tighter mb-5">
+              <%= post.content %>
+            </div>
+            <div class="btns absolute bottom-0 mb-2 mt-2 z-0 flex justify-between gap-44">
+              <a class="text-blue-400 text-[15px]" href="/like/<%= post._id %>">
+                <%= post.likes.length %>
+                  <% if(post.likes.indexOf(user._id)===-1){ %>
+                    <i class="ri-heart-line ml-1 text-red-500 text-[18px]"></i>
+                    <% }else{ %>
+                      <i class="ri-heart-fill ml-1 text-red-500 text-[18px]"></i>
+                      <% }%>
+              </a>
+              <a class="text-sm " href="/edit/<%= post._id %>">Edit</a>
+            </div>
+
+          </div>
+          <% }); %>
+
+      </div>
+    </div>
+  </main>
+  <script>
+    // Get the profile picture element
+    const profilePic = document.getElementById('pic');
+
+    // Add click event listener
+    profilePic.addEventListener('click', function() {
+        // Redirect to the /uploads page
+        window.location.href = '/upload';
+    });
+</script>
+
+  <script src="/javascripts/script.js"></script>
+</body>
+
+</html>
