@@ -189,7 +189,45 @@ app.post("/upload",isLoggedIn,upload.single('image'),async(req,res)=>{
     await user.save()
     res.redirect("/profile")
 })
+app.get('/chat', isLoggedIn, async(req, res) => {
+    let user = await userModel.findOne({email:req.user.email});
+    res.render('chat', { user, messages: [] });
+  });
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
+});
+
+
+const http = require('http');
+const socketIo = require('socket.io');
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Socket.io logic goes here
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    socket.emit('alert', '<%=user.username%> joined the chat');
+  
+    // Handle sending messages
+    // When receiving a message from a client
+// When receiving a message from a client
+socket.on('send message', (data) => {
+  // Broadcast the message to all clients along with the sender's username and timestamp
+  io.emit('new message', { message: data.message, sender: data.username, timestamp: new Date().toLocaleTimeString('en-US',{
+    hour:'2-digit',
+    minute:'2-digit',
+    hour12:true
+  }) });
+});
+
+  
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+  });
+  
+
+server.listen(4000, () => {
+  console.log('Server running on port 3000');
 });

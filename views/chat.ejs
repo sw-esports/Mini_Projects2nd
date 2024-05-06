@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+    <link rel="stylesheet" href="stylesheets/profile.css">
+    <link rel="stylesheet" href="/stylesheets/sidebar.css">
+    <style>
+        .username {
+            font-size: 0.8rem;
+            font-weight: 100;
+            color: grey;
+            margin: 4px;
+        }
+        .time {
+            font-size: 0.8rem;
+        }
+        .message-context-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body class="bgc h-screen overflow-x-hidden">
+    <main class="w-screen min-h-screen : bg-[#11101D]   text-white p-5 font-mono ">
+        <div class="sidebar text-black">
+          <div class="logo-details">
+            <i class='bx bxl-codepen icon'></i>
+            <div class="logo_name">SW.ORD</div>
+            <i class='bx bx-menu' id="btn"></i>
+          </div>
+          <ul class="nav-list">
+            <li>
+              <i class='bx bx-search'></i>
+              <input type="text" placeholder="Search...">
+              <span class="tooltip">Search</span>
+            </li>
+            <li>
+              <a href="/profile">
+                <i class='bx bx-grid-alt'></i>
+                <span class="links_name">All Post</span>
+              </a>
+              <span class="tooltip">All POST</span>
+            </li>
+            <li>
+              <a href="/profile">
+                <i class='bx bx-user'></i>
+                <span class="links_name">User</span>
+              </a>
+              <span class="tooltip">User</span>
+            </li>
+            <li>
+              <a href="/chat">
+                <i class='bx bx-chat'></i>
+                <span class="links_name">Chat</span>
+              </a>
+              <span class="tooltip">Chat</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-pie-chart-alt-2'></i>
+                <span class="links_name">Analytics</span>
+              </a>
+              <span class="tooltip">Analytics</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-folder'></i>
+                <span class="links_name">File Manager</span>
+              </a>
+              <span class="tooltip">Files</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-cart-alt'></i>
+                <span class="links_name">Order</span>
+              </a>
+              <span class="tooltip">Order</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-heart'></i>
+                <span class="links_name">Liked</span>
+              </a>
+              <span class="tooltip">Liked</span>
+            </li>
+            <li>
+              <a href="/upload">
+                <i class='bx bx-cog'></i>
+                <span class="links_name">Setting</span>
+              </a>
+              <span class="tooltip">Setting</span>
+            </li>
+            <li class="profile">
+              <div class="profile-details">
+                <i class='bx bx-export'></i>
+                <div class="name_job">
+                  <div class="name">Logout</div>
+                </div>
+              </div>
+              <a href="/logout"><i class='bx bx-log-out' id="log_out"></i></a>
+            </li>
+          </ul>
+        </div>
+        <section class="home-section">
+    <div class="nav text-white  w-full px-4 flex justify-between items-center mb-5  border-b-2 border-spacing-2 h-20">
+        <div class="left w-1/2">
+          <h1 class="text-3xl">Let chat: <%= user.username %>✉️</h1>
+        </div>
+        <div class="right flex align-middle gap-3"><a href="/profile">
+            <i class="ri-home-smile-fill bg-blue-600 text-2xl relative top-2 px-6 py-2 rounded-md  hover:bg-yellow-500"></i>
+            </a>
+            <div class="image-container w-12 h-12 rounded-md  overflow-hidden">
+              <img class=" cursor-pointer object-cover w-12 h-12 scale-x-[-1] " src="/uploads/images/<%=user.profilepic%>" id="pic" alt="PP">
+            </div>
+            </div>
+      </div>
+    <div class="flex relative top-28 items-center justify-center">
+        
+        <div class="w-full max-w-xl rounded-lg bg-gray-600 p-8 shadow-md chat-container">
+            <div class="messages overflow-y-auto h-64 mb-4">
+                <!-- Messages will be inserted here -->
+        
+            </div>
+            <form class="message-form flex">
+                <input type="text"
+                    class="flex-1 mr-2 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent message-input"
+                    placeholder="Type a message...">
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 send-button">Send</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Add Socket.io library -->
+<script src="/socket.io/socket.io.js"></script>
+
+<!-- Add Socket.io library -->
+<script>
+  // Connect to Socket.io server
+  const socket = io();
+  const currentUser ='<%=user.username%>'; // Set the current user's username
+
+  // Handle form submission
+  document.querySelector('.message-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const messageInput = document.querySelector('.message-input');
+    const message = messageInput.value.trim();
+    if (message !== '') {
+      socket.emit('send message', { message: message, username: currentUser }); // Send message to server
+      messageInput.value = ''; // Clear input field
+    }
+  });
+
+  // Listen for new messages
+  socket.on('new message', (data) => {
+    // Display new message in chat interface
+    const messagesContainer = document.querySelector('.messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message-container', 'px-4', 'py-1', 'rounded-b-md','mb-1','mt-1', 'text-white', 'clear-both');
+
+    if (data.sender === currentUser) {
+      // Message sent by current user, align right
+      messageElement.classList.add('bg-blue-500', 'float-right', 'rounded-l-md', 'mr-2');
+    } else {
+      // Message received, align left
+      messageElement.classList.add('bg-gray-500', 'float-left', 'rounded-r-md', 'ml-2');
+    }
+
+    messageElement.innerHTML = `
+      <div class="message h-full w-full m-0">${data.message}</div>
+      <div class="message-info">
+          <span class="text-sm font-light mr-1">${data.sender}</span>
+          <span class="text-sm font-light mr-1">${data.timestamp}</span>
+      </div>`;
+    messagesContainer.appendChild(messageElement);
+  });
+</script>
+<script src="/javascripts/sidebar.js"></script>
+
+</body>
+
+</html>

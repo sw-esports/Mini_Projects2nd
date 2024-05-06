@@ -2,6 +2,15 @@
     /* Styles for portrait devices */
     .nav > h1 {
       font-size: 20px;
+    
+    }
+  .nav{
+  }
+    .nav > .left> h1 {
+      line-height: 1; /* Set line-height equal to font size */
+  font-size: 16px; /* Example font size */
+     
+
     }
     .nav > a{
         padding:1px 2px;

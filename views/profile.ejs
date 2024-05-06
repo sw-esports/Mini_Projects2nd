@@ -6,15 +6,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="/stylesheets/profile.css">
+  <link rel="stylesheet" href="/stylesheets/sidebar.css">
 </head>
 
-<body>
-  <main class="w-screen min-h-screen : bg-zinc-900 text-white p-5 font-mono ">
-    <div class="nav  w-full px-4 flex justify-between mb-5  border-b-2 border-spacing-2 h-14">
+<body class="overflow-x-hidden   ">
+  <main class="w-screen min-h-screen : bg-[#11101D]   text-white p-5 font-mono ">
+    <div class="sidebar text-black">
+      <div class="logo-details">
+        <i class='bx bxl-codepen icon'></i>
+        <div class="logo_name">SW.ORD</div>
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <i class='bx bx-search'></i>
+          <input type="text" placeholder="Search...">
+          <span class="tooltip">Search</span>
+        </li>
+        <li>
+          <a href="/profile">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">All Post</span>
+          </a>
+          <span class="tooltip">All POST</span>
+        </li>
+        <li>
+          <a href="/profile">
+            <i class='bx bx-user'></i>
+            <span class="links_name">User</span>
+          </a>
+          <span class="tooltip">User</span>
+        </li>
+        <li>
+          <a href="/chat">
+            <i class='bx bx-chat'></i>
+            <span class="links_name">Chat</span>
+          </a>
+          <span class="tooltip">Chat</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-pie-chart-alt-2'></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-folder'></i>
+            <span class="links_name">File Manager</span>
+          </a>
+          <span class="tooltip">Files</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-cart-alt'></i>
+            <span class="links_name">Order</span>
+          </a>
+          <span class="tooltip">Order</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-heart'></i>
+            <span class="links_name">Saved</span>
+          </a>
+          <span class="tooltip">Saved</span>
+        </li>
+        <li>
+          <a href="/upload">
+            <i class='bx bx-cog'></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <i class='bx bx-export'></i>
+            <div class="name_job">
+              <div class="name">Logout</div>
+            </div>
+          </div>
+          <a href="/logout"><i class='bx bx-log-out' id="log_out"></i></a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+
+
+    <div class="nav  w-full px-4 flex justify-between items-center mb-5  border-b-2 border-spacing-2 h-14">
       <div class="left w-1/2">
-        <h1 class="text-3xl">Welcome <%= user.username %>❤️👌 </h1>
+        <h1 class="text-3xl">Welcome: <%= user.username %>❤️ </h1>
       </div>
       <div class="right flex gap-3"><a href="/logout"><button
             class="bg-blue-600 px-6 py-2 rounded-md  hover:bg-yellow-500">Logout</button>
@@ -58,20 +143,12 @@
           <% }); %>
 
       </div>
-    </div>
+    </div>    </section>
   </main>
-  <script>
-    // Get the profile picture element
-    const profilePic = document.getElementById('pic');
-
-    // Add click event listener
-    profilePic.addEventListener('click', function() {
-        // Redirect to the /uploads page
-        window.location.href = '/upload';
-    });
-</script>
+  
 
   <script src="/javascripts/script.js"></script>
+  <script src="/javascripts/sidebar.js"></script>
 </body>
 
 </html>
